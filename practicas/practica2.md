@@ -40,5 +40,8 @@ git
 + Software comunicar con el kernel, SF -> CPU -> Kernel
 
 ## Que aprendi
+En esta practica aprendi el como de manera sencilla modificar algun archivo como lo es el "sh.c", donde agregamos la lectura del comando "p" a la terminal. Comando que realizara lo mimos a un comando previo ya llamado. Un ejemplo es si presiono "ls" y despues "p", correra lo mismo que "ls".  
 
 ## Url del commit
+
+[Commit](https://github.com/memoherreraacosta/so-gp1/commit/8f0c07113beacce989eb01141f2f4d93b8921a3d)
