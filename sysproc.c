@@ -92,12 +92,12 @@ sys_uptime(void)
 
 int
 sys_shutdown(void){
-	outw(0xB004, 0x2000);
+	outw(0xB004, 0x0 | 0x2000);
 	return 0;	
 }
 
 int 
 sys_reboot(void){
-	outb(0x64, 0xFE00);
+	outb(0x64, 0xFE);
 	return 0;
 }

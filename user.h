@@ -39,3 +39,5 @@ void free(void*);
 int atoi(const char*);
 int shutdown(void);
 int reboot(void);
+int setpriority(int, int);
+int getpriority(int);
