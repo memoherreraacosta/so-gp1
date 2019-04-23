@@ -7,14 +7,21 @@
 
 #define SHM_SIZE 1024  /* make it a 1K shared memory segment */
 
+struct st {
+  char name[10];
+  int id;
+};
+
 int main(int argc, char *argv[])
 {
     key_t key;
     int shmid;
-    char *data;
+//  char *data;
     int mode;
 
-    if (argc > 2) {
+    struct st *data;
+
+    if (argc > 3) {
         fprintf(stderr, "usage: shmdemo [data_to_write]\n");
         exit(1);
     }
@@ -32,18 +39,19 @@ int main(int argc, char *argv[])
     }
 
     /* attach to the segment to get a pointer to it: */
-    data = shmat(shmid, (void *)0, 0);
-    if (data == (char *)(-1)) {
+    data = (struct st *) shmat(shmid, (void *)0, 0);
+    if (data == (struct st *)(-1)) {
         perror("shmat");
         exit(1);
     }
 
     /* read or modify the segment, based on the command line: */
-    if (argc == 2) {
+    if (argc == 3) {
         printf("writing to segment: \"%s\"\n", argv[1]);
-        strncpy(data, argv[1], SHM_SIZE);
+        data[0].id = atoi(argv[2]);
+	strncpy(data[0].name,argv[1],10);
     } else
-        printf("segment contains: \"%s\"\n", data);
+        printf("segment contains: \"%s %d\"\n", data[0].name, data[0].id);
 
     /* detach from the segment: */
     if (shmdt(data) == -1) {
